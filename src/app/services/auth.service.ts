@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-
-import { map } from 'rxjs/operators';
-import { Usuario } from '../models/usuario.model';
 import { AngularFirestore } from '@angular/fire/firestore';
+
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.reducer';
-import * as ACTIONS from '../auth/auth.actions';
+import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+
+import { Usuario } from '../models/usuario.model';
+import { AppState } from '../app.reducer';
+
+import * as authActions from '../auth/auth.actions';
+import * as ingresosEgresosActions from '.././ingreso-egreso/ingreso-egreso.action';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userSubscription: Subscription;
+  private _usuario: Usuario;
 
   constructor(
     public auth: AngularFireAuth,
@@ -29,11 +33,16 @@ export class AuthService {
           .valueChanges()
           .subscribe((fireStoreUsr: any) => {
             const userN = Usuario.fromFirebase(fireStoreUsr);
-            this.store.dispatch(ACTIONS.setUser({ usuario: userN }));
+            this.store.dispatch(authActions.setUser({ usuario: userN }));
+            this.store.dispatch(ingresosEgresosActions.unSetItems());
+            this._usuario = userN;
           });
       } else {
-        this.store.dispatch(ACTIONS.unSetUser());
-        this.userSubscription.unsubscribe();
+        this.store.dispatch(authActions.unSetUser());
+        this.store.dispatch(ingresosEgresosActions.unSetItems());
+
+        if (!!this.userSubscription) this.userSubscription.unsubscribe();
+        this._usuario = null;
       }
     });
   }
@@ -55,7 +64,13 @@ export class AuthService {
     return this.auth.signInWithEmailAndPassword(email, password);
   }
 
+  get usuario(): Usuario {
+    return { ...this._usuario };
+  }
+
   logout(): Promise<any> {
+    this.store.dispatch(ingresosEgresosActions.unSetItems());
+
     return this.auth.signOut();
   }
 
