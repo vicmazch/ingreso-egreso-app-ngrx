@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
+import { AppStateIngresoEgreso } from '../ingreso-egreso.reducer';
 import { Subscription } from 'rxjs';
 
 import { ChartType } from 'chart.js';
@@ -27,7 +27,7 @@ export class EstadisticaComponent implements OnInit, OnDestroy {
 
   ingresosEgresosSubscribe: Subscription;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppStateIngresoEgreso>) {}
 
   ngOnInit(): void {
     this.ingresosEgresosSubscribe = this.store

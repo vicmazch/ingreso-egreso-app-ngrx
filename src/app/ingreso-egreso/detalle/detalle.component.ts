@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
+import { AppStateIngresoEgreso } from '../ingreso-egreso.reducer';
 import * as ingresosEgresosActions from '.././../ingreso-egreso/ingreso-egreso.action';
 import { IngresoEgreso } from 'src/app/models/ingreso-egreso.model';
 
@@ -21,7 +21,7 @@ export class DetalleComponent implements OnInit, OnDestroy {
   ingresosEgresos: IngresoEgreso[];
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<AppStateIngresoEgreso>,
     private ingresoEgresoService: IngresoEgresoService
   ) {}
 

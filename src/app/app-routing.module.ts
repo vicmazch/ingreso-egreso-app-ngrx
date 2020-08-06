@@ -6,8 +6,9 @@ import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 // MIS ROUTES HIJAS
 import { dashboardRoutes } from './dashboard/dashboard.routes';
-// GUARDS
 import { AuthGuard } from './services/auth.guard';
+// GUARDS
+// import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,9 +18,14 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: '',
-    component: DashboardComponent,
-    children: dashboardRoutes,
-    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    loadChildren: () =>
+      import('./ingreso-egreso/ingreso-egreso.module').then(
+        (m) => m.IngresoEgresoModule
+      ),
+    // component: DashboardComponent,
+    // children: dashboardRoutes,
+    // canActivate: [AuthGuard],
   },
   {
     path: '**',

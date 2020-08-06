@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IngresoEgreso } from '../models/ingreso-egreso.model';
+import { IngresoEgreso } from '../../models/ingreso-egreso.model';
 import _ from 'lodash';
 
 @Pipe({
@@ -7,8 +7,6 @@ import _ from 'lodash';
 })
 export class OrdenIngresoPipe implements PipeTransform {
   transform(items: IngresoEgreso[]): IngresoEgreso[] {
-    console.log('::: ITEMS ', JSON.stringify(items));
-
     if (items && items.length) {
       //   return _.orderBy(items, (_i) => _i.tipo);
       return [...items].sort((a, b) => {

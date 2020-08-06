@@ -19,39 +19,53 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // NG2 CHARTS
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
+
+// MODULES
+import { AuthModule } from './auth/auth.module';
+// import { SharedModule } from './shared/shared.module';
+// import { IngresoEgresoModule } from './ingreso-egreso/ingreso-egreso.module';
 
 // MIS COMPONENTES
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { IngresoEgresoComponent } from './ingreso-egreso/ingreso-egreso.component';
-import { EstadisticaComponent } from './ingreso-egreso/estadistica/estadistica.component';
-import { DetalleComponent } from './ingreso-egreso/detalle/detalle.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { OrdenIngresoPipe } from './pipes/orden-ingreso.pipe';
+
+// import { LoginComponent } from './auth/login/login.component';
+// import { RegisterComponent } from './auth/register/register.component';
+
+// import { DashboardComponent } from './dashboard/dashboard.component';
+
+// import { IngresoEgresoComponent } from './ingreso-egreso/ingreso-egreso.component';
+// import { EstadisticaComponent } from './ingreso-egreso/estadistica/estadistica.component';
+// import { DetalleComponent } from './ingreso-egreso/detalle/detalle.component';
+
+// import { FooterComponent } from './shared/footer/footer.component';
+// import { NavbarComponent } from './shared/navbar/navbar.component';
+// import { SidebarComponent } from './shared/sidebar/sidebar.component';
+
+// import { OrdenIngresoPipe } from './pipes/orden-ingreso.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent,
-    IngresoEgresoComponent,
-    EstadisticaComponent,
-    DetalleComponent,
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
-    OrdenIngresoPipe,
+    // LoginComponent,
+    // RegisterComponent,
+    // DashboardComponent,
+    // IngresoEgresoComponent,
+    // EstadisticaComponent,
+    // DetalleComponent,
+    // FooterComponent,
+    // NavbarComponent,
+    // SidebarComponent,
+    // OrdenIngresoPipe,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    // MODULES
+    AuthModule,
+    // SharedModule,
+    // IngresoEgresoModule,
     // NGRX
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
@@ -63,7 +77,7 @@ import { OrdenIngresoPipe } from './pipes/orden-ingreso.pipe';
     AngularFirestoreModule,
     AngularFireAuthModule,
     // NG2 CHART
-    ChartsModule,
+    // ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
